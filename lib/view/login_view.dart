@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/view/signup_view.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -17,7 +18,7 @@ class LoginView extends StatelessWidget {
               Column(
                 children: [
                   Image.asset(
-                    'assets/logo.png', // Replace with your logo's file path
+                    'assets/images/logo.png',
                     height: 100,
                   ),
                   const SizedBox(height: 10),
@@ -36,7 +37,7 @@ class LoginView extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email_outlined),
-                  hintText: 'Email',
+                  labelText: 'Email',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -48,7 +49,7 @@ class LoginView extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock_outline),
-                  hintText: 'Password',
+                  labelText: 'Password',
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -98,6 +99,12 @@ class LoginView extends StatelessWidget {
                   const Text("Don't have an account? "),
                   GestureDetector(
                     onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SignUpView(),
+                        ),
+                      );
                       // Navigate to Create Account screen
                     },
                     child: const Text(
