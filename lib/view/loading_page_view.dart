@@ -32,9 +32,9 @@ class LoadingPageView extends StatelessWidget {
             ),
             const SizedBox(height: 40),
             // Progress Indicator
-            // const CircularProgressIndicator(
-            //   valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
-            // ),
+            const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.orange),
+            ),
           ],
         ),
       ),
