@@ -1,7 +1,23 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
-class LoadingPageView extends StatelessWidget {
+class LoadingPageView extends StatefulWidget {
   const LoadingPageView({super.key});
+
+  @override
+  State<LoadingPageView> createState() => _LoadingPageViewState();
+}
+
+class _LoadingPageViewState extends State<LoadingPageView> {
+  @override
+  void initState() {
+    super.initState();
+
+    // Navigate to the login page after a delay
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +36,15 @@ class LoadingPageView extends StatelessWidget {
             // App Name and Tagline
             const Column(
               children: [
-                SizedBox(height: 1),
+                Text(
+                  'HUNGER END',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8),
                 Text(
                   'Your favorite food, just a tap away!',
                   style: TextStyle(
