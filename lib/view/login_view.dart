@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery_app/view/home_view.dart';
 import 'package:food_delivery_app/view/signup_view.dart';
 
 class LoginView extends StatelessWidget {
@@ -76,6 +77,10 @@ class LoginView extends StatelessWidget {
               // Login Button
               ElevatedButton(
                 onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeView()),
+                  );
                   // Handle login action
                 },
                 style: ElevatedButton.styleFrom(
