@@ -6,30 +6,39 @@ class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: const Row(
-          children: [
-            Icon(Icons.location_on, color: Colors.orange),
-            SizedBox(width: 5),
-            Expanded(
-              child: Text(
-                'P82+2R9, Rudramati Marga, Kathmandu 44605, N...',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
+        title: const Padding(
+          padding: EdgeInsets.only(right: 20.0),
+          child: Row(
+            children: [
+              Icon(Icons.location_on, color: Colors.orange),
+              SizedBox(width: 5),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(right: 8.0),
+                  child: Text(
+                    'P82+2R9, Rudramati Marga, Kathmandu 44605, N...',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                overflow: TextOverflow.ellipsis,
               ),
-            ),
-            Icon(Icons.notifications_none, color: Colors.grey),
-          ],
+              Icon(Icons.message, color: Colors.black), // Messenger icon
+              SizedBox(width: 10), // Space between the two icons
+              Icon(Icons.notifications_none, color: Colors.black),
+            ],
+          ),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,10 +49,10 @@ class DashboardView extends StatelessWidget {
                   prefixIcon: const Icon(Icons.search, color: Colors.grey),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(color: Colors.grey),
+                    borderSide: const BorderSide(color: Colors.black),
                   ),
                   filled: true,
-                  fillColor: Colors.grey[200],
+                  fillColor: Colors.white,
                 ),
               ),
               const SizedBox(height: 15),
@@ -79,13 +88,16 @@ class DashboardView extends StatelessWidget {
                                   BorderRadius.all(Radius.circular(20)),
                             ),
                           ),
-                          child: const Text('Order Now'),
+                          child: const Text(
+                            'Order Now',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ],
                     ),
                     Image.asset(
                       'assets/images/combo.png',
-                      height: 100,
+                      height: 70,
                     ), // Replace with actual image asset
                   ],
                 ),
@@ -97,7 +109,8 @@ class DashboardView extends StatelessWidget {
               const SizedBox(height: 10),
               _buildHorizontalList([
                 _buildCategoryItem('Foods', 'assets/images/momo.jpg'),
-                _buildCategoryItem('Pizza', 'assets/images/pizza.jpg'),
+                _buildCategoryItem('Pizza', 'assets/images/cake.jpg'),
+                _buildCategoryItem('Bakery', 'assets/images/pizza.jpg'),
                 _buildCategoryItem('Dessert', 'assets/images/dessert.jpg'),
                 _buildCategoryItem('Drinks', 'assets/images/drink.jpg'),
               ]),
@@ -110,7 +123,7 @@ class DashboardView extends StatelessWidget {
                 _buildFoodItem(
                     'Chicken Burger', 'assets/images/burger.jpg', 300),
                 _buildFoodItem('Pizza', 'assets/images/pizza.jpg', 800),
-                _buildFoodItem('Sandwich', 'assets/images/sandwich.png', 500),
+                _buildFoodItem('Noodles', 'assets/images/noodles.jpg', 500),
                 _buildFoodItem('Chicken Tandoori',
                     'assets/images/chicken_tandoori.jpg', 600),
               ]),
@@ -136,7 +149,7 @@ class DashboardView extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.grey,
+        unselectedItemColor: Colors.black,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -178,7 +191,7 @@ class DashboardView extends StatelessWidget {
           onTap: onTap,
           child: const Text(
             'See All',
-            style: TextStyle(color: Colors.orange),
+            style: TextStyle(color: Colors.black),
           ),
         ),
       ],

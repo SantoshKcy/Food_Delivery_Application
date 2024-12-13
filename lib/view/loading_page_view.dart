@@ -15,7 +15,7 @@ class _LoadingPageViewState extends State<LoadingPageView> {
 
     // Navigate to the login page after a delay
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/login');
+      Navigator.pushReplacementNamed(context, '/welcome');
     });
   }
 
