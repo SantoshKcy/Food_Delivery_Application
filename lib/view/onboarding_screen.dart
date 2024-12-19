@@ -155,11 +155,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 }
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.orange,
                 padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30),
-                ),
               ),
               child: Text(
                 _currentPage == _onboardingData.length - 1

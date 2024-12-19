@@ -86,10 +86,6 @@ class SignUpView extends StatelessWidget {
                   // Handle sign-up logic
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
                   padding: const EdgeInsets.symmetric(vertical: 15),
                 ),
                 child: const Text(
