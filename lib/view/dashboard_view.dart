@@ -28,16 +28,16 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Text(
                     'P82+2R9, Rudramati Marga, Kathmandu 44605, N...',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 14,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ),
-              Icon(Icons.message, color: Colors.black), // Messenger icon
+              Icon(Icons.message, color: Colors.white), // Messenger icon
               SizedBox(width: 10), // Space between the two icons
-              Icon(Icons.notifications_none, color: Colors.black),
+              Icon(Icons.notifications_none, color: Colors.white),
             ],
           ),
         ),
