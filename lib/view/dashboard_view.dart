@@ -13,8 +13,9 @@ class _DashboardViewState extends State<DashboardView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.orange,
         elevation: 0,
+        automaticallyImplyLeading: false,
         title: const Padding(
           padding: EdgeInsets.only(right: 20.0),
           child: Row(

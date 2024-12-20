@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:food_delivery_app/view/dashboard_view.dart';
+import 'package:food_delivery_app/view/home_view.dart';
 import 'package:food_delivery_app/view/signup_view.dart';
 
 class LoginView extends StatelessWidget {
@@ -79,8 +79,7 @@ class LoginView extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const DashboardView()),
+                    MaterialPageRoute(builder: (context) => const HomeView()),
                   );
                   // Handle login action
                 },

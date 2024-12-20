@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery_app/core/app_theme/app_theme.dart';
-import 'package:food_delivery_app/view/dashboard_view.dart';
+import 'package:food_delivery_app/view/home_view.dart';
 import 'package:food_delivery_app/view/loading_page_view.dart';
 import 'package:food_delivery_app/view/login_view.dart';
 import 'package:food_delivery_app/view/onboarding_screen.dart';
@@ -20,7 +20,7 @@ class App extends StatelessWidget {
         '/welcome': (context) => const OnboardingScreen(),
         '/login': (context) => const LoginView(),
         '/signup': (context) => const SignUpView(),
-        '/dashboard': (context) => const DashboardView(),
+        '/home': (context) => const HomeView(),
       },
     );
   }

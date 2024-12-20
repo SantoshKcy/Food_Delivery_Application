@@ -5,8 +5,27 @@ class AccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Account'),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.orange,
+        elevation: 0,
+        title: const Text(
+          'Account',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: const Center(
+        child: Text(
+          'Account',
+          style: TextStyle(fontSize: 18),
+        ),
+      ),
     );
   }
 }
