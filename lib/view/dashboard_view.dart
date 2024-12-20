@@ -19,7 +19,7 @@ class _DashboardViewState extends State<DashboardView> {
           padding: EdgeInsets.only(right: 20.0),
           child: Row(
             children: [
-              Icon(Icons.location_on, color: Colors.orange),
+              Icon(Icons.location_on, color: Colors.white),
               SizedBox(width: 5),
               Expanded(
                 child: Padding(
