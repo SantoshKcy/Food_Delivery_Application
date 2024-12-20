@@ -26,7 +26,7 @@ class LoginView extends StatelessWidget {
                   const Text(
                     'LOGIN',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -68,7 +68,7 @@ class LoginView extends StatelessWidget {
                     'Forgot Password?',
                     style: TextStyle(
                       color: Colors.grey,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -90,7 +90,7 @@ class LoginView extends StatelessWidget {
                 ),
                 child: const Text(
                   'Login',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 20),
@@ -148,7 +148,7 @@ class LoginView extends StatelessWidget {
                 icon: const Icon(Icons.facebook, color: Colors.white),
                 label: const Text(
                   'Login with Facebook',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
               const SizedBox(height: 10),
@@ -167,7 +167,7 @@ class LoginView extends StatelessWidget {
                 icon: const Icon(Icons.g_mobiledata, color: Colors.white),
                 label: const Text(
                   'Login with Google',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ],

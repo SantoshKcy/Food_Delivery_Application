@@ -19,13 +19,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           "It's a pleasure to meet you. We are excited that you're here so let's get started."
     },
     {
-      "image": "assets/images/welcome2.png",
+      "image": "assets/images/welcome.png",
       "title": "All Your Favourites",
       "description":
           "Get your favourite meals delivered fresh and fast with just a few taps!"
     },
     {
-      "image": "assets/images/welcome3.png",
+      "image": "assets/images/welcome.png",
       "title": "Super Fast Delivery",
       "description":
           "Easily find your type of food craving and you will get fast delivery in wide range."
@@ -161,7 +161,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 _currentPage == _onboardingData.length - 1
                     ? "Get Started"
                     : "Next",
-                style: const TextStyle(fontSize: 16, color: Colors.white),
+                style: const TextStyle(fontSize: 18, color: Colors.white),
               ),
             ),
           ),

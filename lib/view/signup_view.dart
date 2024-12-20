@@ -8,14 +8,23 @@ class SignUpView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.orange,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        title: const Text(
+          'Sign Up',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -23,17 +32,6 @@ class SignUpView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Page Title
-            const Text(
-              'SIGN UP',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-            const SizedBox(height: 20),
-
             // Input Fields
             _buildTextField(label: 'First Name'),
             const SizedBox(height: 10),
@@ -61,12 +59,12 @@ class SignUpView extends StatelessWidget {
                   child: Text.rich(
                     TextSpan(
                       text: 'I accept to all the ',
-                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      style: TextStyle(color: Colors.black, fontSize: 18),
                       children: [
                         TextSpan(
                           text: 'Terms and Conditions.',
                           style: TextStyle(
-                            color: Colors.blue,
+                            color: Colors.orange,
                             decoration: TextDecoration.underline,
                           ),
                         ),
@@ -90,7 +88,7 @@ class SignUpView extends StatelessWidget {
                 ),
                 child: const Text(
                   'Sign Up',
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
               ),
             ),
@@ -101,12 +99,12 @@ class SignUpView extends StatelessWidget {
               child: Text.rich(
                 TextSpan(
                   text: 'Already have an account? ',
-                  style: const TextStyle(color: Colors.black, fontSize: 14),
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
                   children: [
                     TextSpan(
                       text: 'Sign In',
                       style: const TextStyle(
-                        color: Colors.blue,
+                        color: Colors.orange,
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.underline,
                       ),
@@ -131,6 +129,9 @@ class SignUpView extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
+        labelStyle: const TextStyle(
+          fontSize: 18,
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
         ),

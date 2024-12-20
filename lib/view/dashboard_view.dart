@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
 
+  @override
+  State<DashboardView> createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +114,7 @@ class DashboardView extends StatelessWidget {
               const SizedBox(height: 10),
               _buildHorizontalList([
                 _buildCategoryItem('Foods', 'assets/images/momo.jpg'),
-                _buildCategoryItem('Pizza', 'assets/images/cake.jpg'),
+                _buildCategoryItem('Pizza', 'assets/images/burger.jpg'),
                 _buildCategoryItem('Bakery', 'assets/images/pizza.jpg'),
                 _buildCategoryItem('Dessert', 'assets/images/dessert.jpg'),
                 _buildCategoryItem('Drinks', 'assets/images/drink.jpg'),
@@ -145,33 +150,6 @@ class DashboardView extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.black,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_border),
-            label: 'Wishlist',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart_outlined),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail_outline),
-            label: 'Inbox',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: 'Account',
-          ),
-        ],
       ),
     );
   }
