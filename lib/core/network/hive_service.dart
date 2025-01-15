@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 class HiveService {
   Future<void> init() async {
     var directory = await getApplicationDocumentsDirectory();
-    var path = '${directory.path}hunger_end.db';
+    var path = '${directory.path}/hunger_end.db';
 
     Hive.init(path);
     // Hive.registerAdapter(AuthHiveModelAdapter());
@@ -14,36 +14,36 @@ class HiveService {
 
   // Auth Queries
   Future<void> register(AuthHiveModel auth) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
-    await box.put(auth.studentId, auth);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
+    await box.put(auth.customerId, auth);
   }
 
   Future<void> deleteAuth(String id) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
     await box.delete(id);
   }
 
   Future<List<AuthHiveModel>> getAllAuth() async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
     return box.values.toList();
   }
 
   // Login with username and password
   Future<AuthHiveModel?> login(String email, String password) async {
-    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.studentBox);
+    var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
     var student = box.values.firstWhere(
-        (element) => element.email == username && element.password == password);
+        (element) => element.email == email && element.password == password);
     box.close();
     return student;
   }
 
   Future<void> clearAll() async {
-    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
+    await Hive.deleteBoxFromDisk(HiveTableConstant.customerBox);
   }
 
   // Clear Student Box
   Future<void> clearStudentBox() async {
-    await Hive.deleteBoxFromDisk(HiveTableConstant.studentBox);
+    await Hive.deleteBoxFromDisk(HiveTableConstant.customerBox);
   }
 
   Future<void> close() async {
