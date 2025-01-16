@@ -15,6 +15,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -24,20 +25,43 @@ class LoginView extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
+                    // App Logo and Name
+                    Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/logo1.png',
+                          height: 60,
+                          width: 100,
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          'Hunger End', //
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFE5404), //
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
                     const Text(
                       'Login',
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 24,
                         fontFamily: 'Brand Bold',
                       ),
                     ),
-                    SizedBox(height: 50),
+                    const SizedBox(height: 50),
                     TextFormField(
                       key: const ValueKey('email'),
                       controller: _emailController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Email',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -46,13 +70,16 @@ class LoginView extends StatelessWidget {
                         return null;
                       },
                     ),
-                    _gap,
+                    const SizedBox(height: 20),
                     TextFormField(
                       key: const ValueKey('password'),
                       controller: _passwordController,
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
                       validator: ((value) {
                         if (value == null || value.isEmpty) {
@@ -61,7 +88,22 @@ class LoginView extends StatelessWidget {
                         return null;
                       }),
                     ),
-                    _gap,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          // Handle forgot password logic
+                        },
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     ElevatedButton(
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -72,24 +114,13 @@ class LoginView extends StatelessWidget {
                                   password: _passwordController.text,
                                 ),
                               );
-
-                          //   if (_usernameController.text == 'kiran' &&
-                          //       _passwordController.text == 'kiran123') {
-                          //     context.read<LoginBloc>().add(
-                          //           NavigateHomeScreenEvent(
-                          //             destination: HomeView(),
-                          //             context: context,
-                          //           ),
-                          //         );
-                          //   } else {
-                          //     showMySnackBar(
-                          //       context: context,
-                          //       message: 'Invalid username or password',
-                          //       color: Colors.red,
-                          //     );
-                          //   }
                         }
                       },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
                       child: const SizedBox(
                         height: 50,
                         child: Center(
@@ -103,28 +134,80 @@ class LoginView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    ElevatedButton(
-                      key: const ValueKey('registerButton'),
-                      onPressed: () {
-                        context.read<LoginBloc>().add(
-                              NavigateRegisterScreenEvent(
-                                destination: RegisterView(),
-                                context: context,
-                              ),
-                            );
-                      },
-                      child: const SizedBox(
-                        height: 50,
-                        child: Center(
-                          child: Text(
-                            'Register',
+                    const SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          "Don't have an account? ",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.read<LoginBloc>().add(
+                                  NavigateRegisterScreenEvent(
+                                    destination: RegisterView(),
+                                    context: context,
+                                  ),
+                                );
+                          },
+                          child: const Text(
+                            'Create Account',
                             style: TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Brand Bold',
+                              color: Color(0xFFFE5404),
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    const Row(
+                      children: [
+                        Expanded(child: Divider(color: Colors.grey)),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: Text('OR'),
+                        ),
+                        Expanded(child: Divider(color: Colors.grey)),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        // Handle Facebook login
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      icon: const Icon(Icons.facebook, color: Colors.white),
+                      label: const Text(
+                        'Login with Facebook',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton.icon(
+                      onPressed: () {
+                        // Handle Google login
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        minimumSize: const Size(double.infinity, 50),
+                      ),
+                      icon: const Icon(Icons.g_mobiledata, color: Colors.white),
+                      label: const Text(
+                        'Login with Google',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
                     ),
                   ],

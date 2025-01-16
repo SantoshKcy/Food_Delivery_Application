@@ -13,6 +13,7 @@ class RegisterView extends StatefulWidget {
 }
 
 class _RegisterViewState extends State<RegisterView> {
+  bool _termsAccepted = false;
   File? _selectedImage;
   final ImagePicker _imagePicker = ImagePicker();
 
@@ -35,10 +36,12 @@ class _RegisterViewState extends State<RegisterView> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xFFFE5404),
         elevation: 0,
@@ -114,7 +117,7 @@ class _RegisterViewState extends State<RegisterView> {
                         radius: 50,
                         backgroundImage: _selectedImage != null
                             ? FileImage(_selectedImage!)
-                            : const AssetImage('assets/images/profile.png')
+                            : const AssetImage('assets/images/profile.jpg')
                                 as ImageProvider,
                         child: _selectedImage == null
                             ? const Icon(
@@ -129,9 +132,12 @@ class _RegisterViewState extends State<RegisterView> {
                   const SizedBox(height: 25),
                   TextFormField(
                     controller: _fnameController,
-                    decoration: const InputDecoration(
-                      labelText: 'First Name',
-                    ),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        labelText: 'First Name',
+                        prefixIcon: const Icon(Icons.person)),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter first name';
@@ -142,8 +148,12 @@ class _RegisterViewState extends State<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _lnameController,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                       labelText: 'Last Name',
+                      prefixIcon: const Icon(Icons.person),
                     ),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
@@ -155,9 +165,12 @@ class _RegisterViewState extends State<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _phoneController,
-                    decoration: const InputDecoration(
-                      labelText: 'Phone Number',
-                    ),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        labelText: 'Phone Number',
+                        prefixIcon: const Icon(Icons.phone)),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter phone number';
@@ -168,9 +181,12 @@ class _RegisterViewState extends State<RegisterView> {
                   _gap,
                   TextFormField(
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                    ),
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        labelText: 'Email',
+                        prefixIcon: const Icon(Icons.email)),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter email';
@@ -183,8 +199,11 @@ class _RegisterViewState extends State<RegisterView> {
                     controller: _passwordController,
                     obscureText: true,
                     decoration: InputDecoration(
-                      labelText: 'Password',
-                    ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        labelText: 'Password',
+                        prefixIcon: Icon(Icons.lock)),
                     validator: ((value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter password';
@@ -193,10 +212,73 @@ class _RegisterViewState extends State<RegisterView> {
                     }),
                   ),
                   _gap,
+                  TextFormField(
+                    controller: _confirmPasswordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      labelText: 'Confirm Password',
+                      prefixIcon: Icon(Icons.lock),
+                    ),
+                    validator: ((value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please confirm password';
+                      }
+                      if (value != _passwordController.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    }),
+                  ),
+                  _gap,
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _termsAccepted,
+                        activeColor: Color(0xFFFE5404),
+                        onChanged: (bool? value) {
+                          setState(() {
+                            _termsAccepted = value!;
+                          });
+                        },
+                      ),
+                      Expanded(
+                        child: RichText(
+                          text: TextSpan(
+                            text: 'I accept all the ',
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
+                            children: [
+                              TextSpan(
+                                text: 'Terms and Conditions.',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Color(0xFFFE5404),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  _gap,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
+                        if (!_termsAccepted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  'Please accept the Terms and Conditions'),
+                            ),
+                          );
+                          return;
+                        }
                         if (_key.currentState!.validate()) {
                           context.read<RegisterBloc>().add(
                                 RegisterStudent(
@@ -210,6 +292,12 @@ class _RegisterViewState extends State<RegisterView> {
                               );
                         }
                       },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(
+                              30), // Set the border radius
+                        ),
+                      ),
                       child: const Text(
                         'Sign Up',
                         style: TextStyle(fontSize: 18, color: Colors.white),
@@ -217,6 +305,24 @@ class _RegisterViewState extends State<RegisterView> {
                     ),
                   ),
                   _gap,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Already have an account?'),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Navigate to Sign In
+                        },
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Color(0xFFFE5404),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
