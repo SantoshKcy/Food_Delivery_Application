@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:food_delivery_application/app/di/di.dart';
 import 'package:food_delivery_application/core/common/snackbar/my_snackbar.dart';
 import 'package:food_delivery_application/features/auth/domain/use_case/login_usecase.dart';
 import 'package:food_delivery_application/features/auth/presentation/view_model/signup/register_bloc.dart';

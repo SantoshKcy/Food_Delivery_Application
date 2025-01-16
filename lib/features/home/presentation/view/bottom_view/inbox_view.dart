@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AccountView extends StatelessWidget {
-  const AccountView({super.key});
+class InboxView extends StatelessWidget {
+  const InboxView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class AccountView extends StatelessWidget {
         backgroundColor: Colors.orange,
         elevation: 0,
         title: const Text(
-          'Account',
+          'Inbox',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -22,7 +22,7 @@ class AccountView extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Account',
+          'Inbox',
           style: TextStyle(fontSize: 18),
         ),
       ),

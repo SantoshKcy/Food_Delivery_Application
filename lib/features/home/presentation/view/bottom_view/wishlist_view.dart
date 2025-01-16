@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class AccountView extends StatelessWidget {
-  const AccountView({super.key});
+class WishlistView extends StatelessWidget {
+  const WishlistView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.orange,
-        elevation: 0,
         title: const Text(
-          'Account',
+          'Wishlist',
           style: TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -22,7 +22,7 @@ class AccountView extends StatelessWidget {
       ),
       body: const Center(
         child: Text(
-          'Account',
+          'Wishlist',
           style: TextStyle(fontSize: 18),
         ),
       ),
