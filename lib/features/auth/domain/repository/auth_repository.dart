@@ -7,8 +7,7 @@ import 'package:food_delivery_application/features/auth/domain/entity/auth_entit
 abstract interface class IAuthRepository {
   Future<Either<Failure, void>> registerCustomer(AuthEntity customer);
 
-  Future<Either<Failure, String>> loginStudent(
-      String username, String password);
+  Future<Either<Failure, String>> loginCustomer(String email, String password);
 
   Future<Either<Failure, String>> uploadProfilePicture(File file);
 
