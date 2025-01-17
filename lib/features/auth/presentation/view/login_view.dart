@@ -10,8 +10,6 @@ class LoginView extends StatelessWidget {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  final _gap = const SizedBox(height: 8);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +57,7 @@ class LoginView extends StatelessWidget {
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Email',
+                        prefixIcon: const Icon(Icons.email),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -77,6 +76,7 @@ class LoginView extends StatelessWidget {
                       obscureText: true,
                       decoration: InputDecoration(
                         labelText: 'Password',
+                        prefixIcon: const Icon(Icons.lock),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
@@ -108,7 +108,7 @@ class LoginView extends StatelessWidget {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           context.read<LoginBloc>().add(
-                                LoginStudentEvent(
+                                LoginCustomerEvent(
                                   context: context,
                                   email: _emailController.text,
                                   password: _passwordController.text,

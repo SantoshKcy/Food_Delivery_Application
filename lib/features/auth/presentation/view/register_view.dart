@@ -110,23 +110,26 @@ class _RegisterViewState extends State<RegisterView> {
                         ),
                       );
                     },
-                    child: SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _selectedImage != null
-                            ? FileImage(_selectedImage!)
-                            : const AssetImage('assets/images/profile.jpg')
-                                as ImageProvider,
-                        child: _selectedImage == null
-                            ? const Icon(
-                                Icons.camera_alt,
-                                size: 50,
-                                color: Colors.white,
-                              )
-                            : null,
-                      ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 130,
+                          width: 130,
+                          child: CircleAvatar(
+                            radius: 50,
+                            backgroundImage: _selectedImage != null
+                                ? FileImage(_selectedImage!)
+                                : const AssetImage(
+                                    'assets/images/profile.jpg',
+                                  ) as ImageProvider,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        const Text(
+                          'Upload Picture',
+                          style: TextStyle(fontSize: 16),
+                        )
+                      ],
                     ),
                   ),
                   const SizedBox(height: 25),
@@ -281,7 +284,7 @@ class _RegisterViewState extends State<RegisterView> {
                         }
                         if (_key.currentState!.validate()) {
                           context.read<RegisterBloc>().add(
-                                RegisterStudent(
+                                RegisterCustomer(
                                   context: context,
                                   fName: _fnameController.text,
                                   lName: _lnameController.text,

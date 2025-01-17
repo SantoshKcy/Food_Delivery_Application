@@ -14,22 +14,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
     required RegisterUseCase registerUseCase,
   })  : _registerUseCase = registerUseCase,
         super(RegisterState.initial()) {
-    on<LoadCoursesAndBatches>(_onLoadCoursesAndBatches);
-    on<RegisterStudent>(_onRegisterEvent);
-
-    add(LoadCoursesAndBatches());
-  }
-
-  void _onLoadCoursesAndBatches(
-    LoadCoursesAndBatches event,
-    Emitter<RegisterState> emit,
-  ) {
-    emit(state.copyWith(isLoading: true));
-    emit(state.copyWith(isLoading: false, isSuccess: true));
+    on<RegisterCustomer>(_onRegisterEvent);
   }
 
   void _onRegisterEvent(
-    RegisterStudent event,
+    RegisterCustomer event,
     Emitter<RegisterState> emit,
   ) async {
     emit(state.copyWith(isLoading: true));

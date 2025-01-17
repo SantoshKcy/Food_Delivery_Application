@@ -7,9 +7,7 @@ sealed class RegisterEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadCoursesAndBatches extends RegisterEvent {}
-
-class RegisterStudent extends RegisterEvent {
+class RegisterCustomer extends RegisterEvent {
   final BuildContext context;
   final String fName;
   final String lName;
@@ -17,7 +15,7 @@ class RegisterStudent extends RegisterEvent {
   final String email;
   final String password;
 
-  const RegisterStudent({
+  const RegisterCustomer({
     required this.context,
     required this.fName,
     required this.lName,

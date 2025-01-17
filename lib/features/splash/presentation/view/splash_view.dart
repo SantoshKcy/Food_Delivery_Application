@@ -19,7 +19,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[50],
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           Center(
@@ -27,8 +27,8 @@ class _SplashViewState extends State<SplashView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 200,
-                  width: 200,
+                  height: 100,
+                  width: 100,
                   child: Image.asset('assets/images/logo1.png'),
                 ),
                 const Text(

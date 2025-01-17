@@ -6,10 +6,10 @@ import 'package:path_provider/path_provider.dart';
 class HiveService {
   Future<void> init() async {
     var directory = await getApplicationDocumentsDirectory();
-    var path = '${directory.path}/hunger_end.db';
+    var path = '${directory.path}hunger_end.db';
 
     Hive.init(path);
-    // Hive.registerAdapter(AuthHiveModelAdapter());
+    Hive.registerAdapter(AuthHiveModelAdapter());
   }
 
   // Auth Queries
@@ -31,10 +31,10 @@ class HiveService {
   // Login with username and password
   Future<AuthHiveModel?> login(String email, String password) async {
     var box = await Hive.openBox<AuthHiveModel>(HiveTableConstant.customerBox);
-    var student = box.values.firstWhere(
+    var customer = box.values.firstWhere(
         (element) => element.email == email && element.password == password);
     box.close();
-    return student;
+    return customer;
   }
 
   Future<void> clearAll() async {
@@ -42,7 +42,7 @@ class HiveService {
   }
 
   // Clear Student Box
-  Future<void> clearStudentBox() async {
+  Future<void> clearCustomerBox() async {
     await Hive.deleteBoxFromDisk(HiveTableConstant.customerBox);
   }
 

@@ -6,6 +6,7 @@ import 'package:food_delivery_application/features/auth/domain/use_case/register
 import 'package:food_delivery_application/features/auth/presentation/view_model/login/login_bloc.dart';
 import 'package:food_delivery_application/features/auth/presentation/view_model/signup/register_bloc.dart';
 import 'package:food_delivery_application/features/home/presentation/view_model/home_cubit.dart';
+import 'package:food_delivery_application/features/onboarding/presentation/view_model/onboarding_cubit.dart';
 import 'package:food_delivery_application/features/splash/presentation/view_model/splash_cubit.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,6 +18,7 @@ Future<void> initDependencies() async {
   await _initRegisterDependencies();
   await _initLoginDependencies();
   await _initSplashScreenDependencies();
+  await _initOnboardingScreenDependencies();
 }
 
 _initHiveService() {
@@ -74,6 +76,12 @@ _initLoginDependencies() async {
 
 _initSplashScreenDependencies() async {
   getIt.registerFactory<SplashCubit>(
-    () => SplashCubit(getIt<LoginBloc>()),
+    () => SplashCubit(getIt<OnboardingCubit>()),
+  );
+}
+
+_initOnboardingScreenDependencies() async {
+  getIt.registerFactory<OnboardingCubit>(
+    () => OnboardingCubit(getIt<LoginBloc>()),
   );
 }

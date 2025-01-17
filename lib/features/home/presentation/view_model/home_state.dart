@@ -1,5 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_application/app/di/di.dart';
+import 'package:food_delivery_application/features/home/presentation/view/bottom_view/dashboard_view.dart';
+import 'package:food_delivery_application/features/home/presentation/view_model/home_cubit.dart';
 
 class HomeState extends Equatable {
   final int selectedIndex;
@@ -15,13 +19,19 @@ class HomeState extends Equatable {
     return HomeState(
       selectedIndex: 0,
       views: [
-        const Center(
-          child: Text('Dashboard'),
+        BlocProvider(
+          create: (context) => getIt<HomeCubit>(),
+          child: DashboardView(),
         ),
-        // BlocProvider(
-        //   create: (context) => getIt<CourseBloc>(),
-        //   child: CourseView(),
-        // ),
+        const Center(
+          child: Text('Wishlist'),
+        ),
+        const Center(
+          child: Text('Cart'),
+        ),
+        const Center(
+          child: Text('Inbox'),
+        ),
         const Center(
           child: Text('Account'),
         ),
