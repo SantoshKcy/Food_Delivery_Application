@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:food_delivery_application/app/shared_prefs/token_shared_prefs.dart';
+import 'package:food_delivery_application/core/network/api_service.dart';
 import 'package:food_delivery_application/core/network/hive_service.dart';
 import 'package:food_delivery_application/features/auth/data/data_source/local_data_source/auth_local_datasource.dart';
 import 'package:food_delivery_application/features/auth/data/data_source/remote_data_source/auth_remote_datasource.dart';
@@ -19,7 +20,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 final getIt = GetIt.instance;
 
 Future<void> initDependencies() async {
-  _initHiveService();
+  await _initHiveService();
+  await _initApiService();
+  await _initSharedPreferences();
   await _initHomeDependencies();
   await _initRegisterDependencies();
   await _initLoginDependencies();
@@ -31,6 +34,18 @@ _initHiveService() {
   getIt.registerLazySingleton<HiveService>(
     () => HiveService(),
   );
+}
+
+_initApiService() {
+  // Remote Data Source
+  getIt.registerLazySingleton<Dio>(
+    () => ApiService(Dio()).dio,
+  );
+}
+
+Future<void> _initSharedPreferences() async {
+  final sharedPreferences = await SharedPreferences.getInstance();
+  getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }
 
 _initHomeDependencies() async {
