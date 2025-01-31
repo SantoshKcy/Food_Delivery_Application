@@ -74,7 +74,7 @@ class AppTheme {
         //Bottom navigation bar theme
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.white,
-          selectedItemColor: Color(0xFFFE5404),
+          selectedItemColor: Color(0xFFff7918),
           unselectedItemColor: Colors.black,
           type: BottomNavigationBarType.fixed,
           elevation: 0,
@@ -92,7 +92,7 @@ class AppTheme {
             fontWeight: FontWeight.w400, // Regular
           ),
           titleLarge: TextStyle(
-            fontFamily: 'Poppin Regular',
+            fontFamily: 'Poppins Regular',
             fontSize: 20,
             fontWeight: FontWeight.bold, // Bold
           ),
@@ -107,7 +107,7 @@ class AppTheme {
             fontWeight: FontWeight.w400, // Regular
           ),
           labelLarge: TextStyle(
-            fontFamily: 'Poppins  Regular',
+            fontFamily: 'Poppins Regular',
             fontSize: 14,
             fontWeight: FontWeight.bold, // Bold
           ),

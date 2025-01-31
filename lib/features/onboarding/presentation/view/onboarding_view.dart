@@ -191,7 +191,7 @@ class _OnboardingScreenState extends State<OnboardingView> {
       height: 8,
       width: _currentPage == index ? 20 : 8,
       decoration: BoxDecoration(
-        color: _currentPage == index ? Colors.orange : Colors.grey.shade300,
+        color: _currentPage == index ? Color(0xFFff7918) : Colors.grey.shade300,
         borderRadius: BorderRadius.circular(4),
       ),
     );

@@ -37,7 +37,7 @@ class LoginView extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFFFE5404), //
+                            color: Color(0xFFff7918), //
                           ),
                         ),
                       ],
@@ -154,7 +154,7 @@ class LoginView extends StatelessWidget {
                           child: const Text(
                             'Create Account',
                             style: TextStyle(
-                              color: Color(0xFFFE5404),
+                              color: Color(0xFFff7918),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -185,7 +185,12 @@ class LoginView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         minimumSize: const Size(double.infinity, 50),
                       ),
-                      icon: const Icon(Icons.facebook, color: Colors.white),
+                      icon: Image.asset(
+                        'assets/images/faceboo.png',
+                        height: 24, // Adjust size as needed
+                        width: 24,
+                      ),
+                      // icon: const Icon(Icons.facebook, color: Colors.white),
                       label: const Text(
                         'Login with Facebook',
                         style: TextStyle(fontSize: 18, color: Colors.white),
@@ -204,7 +209,12 @@ class LoginView extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(vertical: 15),
                         minimumSize: const Size(double.infinity, 50),
                       ),
-                      icon: const Icon(Icons.g_mobiledata, color: Colors.white),
+                      icon: Image.asset(
+                        'assets/images/google.png',
+                        height: 24, // Adjust size as needed
+                        width: 24,
+                      ),
+                      // icon: const Icon(Icons.g_mobiledata, color: Colors.white),
                       label: const Text(
                         'Login with Google',
                         style: TextStyle(fontSize: 18, color: Colors.white),

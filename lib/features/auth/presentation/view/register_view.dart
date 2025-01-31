@@ -58,7 +58,7 @@ class _RegisterViewState extends State<RegisterView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFFE5404),
+        backgroundColor: Color(0xFFff7918),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -136,7 +136,7 @@ class _RegisterViewState extends State<RegisterView> {
                             backgroundImage: _img != null
                                 ? FileImage(_img!)
                                 : const AssetImage(
-                                    'assets/images/profile.jpg',
+                                    'assets/images/profile.png',
                                   ) as ImageProvider,
                           ),
                         ),
@@ -256,7 +256,7 @@ class _RegisterViewState extends State<RegisterView> {
                     children: [
                       Checkbox(
                         value: _termsAccepted,
-                        activeColor: Color(0xFFFE5404),
+                        activeColor: Color(0xFFff7918),
                         onChanged: (bool? value) {
                           setState(() {
                             _termsAccepted = value!;
@@ -274,7 +274,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 text: 'Terms and Conditions.',
                                 style: const TextStyle(
                                   fontSize: 16,
-                                  color: Color(0xFFFE5404),
+                                  color: Color(0xFFff7918),
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -339,7 +339,7 @@ class _RegisterViewState extends State<RegisterView> {
                         child: const Text(
                           'Sign In',
                           style: TextStyle(
-                            color: Color(0xFFFE5404),
+                            color: Color(0xFFff7918),
                             fontWeight: FontWeight.bold,
                           ),
                         ),

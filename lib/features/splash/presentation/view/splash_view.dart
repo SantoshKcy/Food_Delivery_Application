@@ -35,7 +35,7 @@ class _SplashViewState extends State<SplashView> {
                   'Hunger End',
                   style: TextStyle(
                     fontSize: 25,
-                    color: Color(0xFFFE5404),
+                    color: Color(0xFFff7918),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -43,14 +43,6 @@ class _SplashViewState extends State<SplashView> {
                 const SizedBox(height: 10),
                 const Text('version : 1.0.0')
               ],
-            ),
-          ),
-          Positioned(
-            bottom: 10,
-            left: MediaQuery.of(context).size.width / 4,
-            child: const Text(
-              'Developed by: Santosh KC',
-              style: TextStyle(fontSize: 15),
             ),
           ),
         ],
