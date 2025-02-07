@@ -167,7 +167,7 @@ void main() {
   tearDown(() {
     reset(mockRepository);
   });
-
+//Test : Invalid email format
   test('should return a Failure when email format is invalid', () async {
     // Arrange
     const params = RegisterUserParams(
