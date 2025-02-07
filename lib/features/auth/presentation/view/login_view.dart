@@ -54,7 +54,7 @@ class LoginView extends StatelessWidget {
                     TextFormField(
                       key: const ValueKey('email'),
                       controller: _emailController,
-                      obscureText: true,
+                      obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         prefixIcon: const Icon(Icons.email),

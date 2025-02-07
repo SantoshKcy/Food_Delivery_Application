@@ -97,6 +97,22 @@ _initLoginDependencies() async {
   getIt.registerLazySingleton<TokenSharedPrefs>(
     () => TokenSharedPrefs(getIt<SharedPreferences>()),
   );
+
+  // =========================== Usecases ===========================
+  getIt.registerLazySingleton<LoginUseCase>(
+    () => LoginUseCase(
+      getIt<AuthRemoteRepository>(),
+      getIt<TokenSharedPrefs>(),
+    ),
+  );
+
+  getIt.registerFactory<LoginBloc>(
+    () => LoginBloc(
+      registerBloc: getIt<RegisterBloc>(),
+      homeCubit: getIt<HomeCubit>(),
+      loginUseCase: getIt<LoginUseCase>(),
+    ),
+  );
 }
 
 _initSplashScreenDependencies() async {
