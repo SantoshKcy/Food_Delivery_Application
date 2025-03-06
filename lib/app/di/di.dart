@@ -26,6 +26,8 @@ import 'package:food_delivery_application/features/onboarding/presentation/view_
 import 'package:food_delivery_application/features/splash/presentation/view_model/splash_cubit.dart';
 import 'package:food_delivery_application/features/wishlist/data/data_source/remote_data_source/wishlist_remote_data_source.dart';
 import 'package:food_delivery_application/features/wishlist/data/model/wishlist_api_model.dart';
+import 'package:food_delivery_application/features/wishlist/domain/usecase/get_wishlist_item_by_user_usecase.dart';
+import 'package:food_delivery_application/features/wishlist/presentation/view_model/wishlist_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -230,14 +232,13 @@ _initWishlistDependencies() {
 
   // =========================== Usecases ===========================
 
-  getIt.registerLazySingleton<GetCartItemsByUserIdUseCase>(
-    () => GetCartItemsByUserIdUseCase(
-        cartRepository: getIt<GetCartItemsByUserIdUseCase>()),
+  getIt.registerLazySingleton<GetWishlistByUserId>(
+    () => GetWishlistByUserId(wishlistRepository: getIt<GetWishlistByUserId>()),
   );
 
   // =========================== Bloc ===========================
-  getIt.registerLazySingleton<CartBloc>(
-    () => CartBloc(
+  getIt.registerLazySingleton<WishlistBloc>(
+    () => WishlistBloc(
       getCartItemsByUserIdUseCase: getIt<GetCartItemsByUserIdUseCase>(),
     ),
   );
