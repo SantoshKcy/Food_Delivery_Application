@@ -1,0 +1,2 @@
+C:/Users/kcsan/OneDrive/Desktop/food_delivery_application/android/app/.cxx/Debug/y563u5b7/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/kcsan/OneDrive/Desktop/food_delivery_application/android/app/.cxx/Debug/y563u5b7/armeabi-v7a/CMakeFiles/rebuild_cache.dir

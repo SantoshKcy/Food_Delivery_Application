@@ -1,150 +1,178 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:food_delivery_application/app/di/di.dart';
+// Entities
+import 'package:food_delivery_application/features/category/domain/entity/category_entity.dart';
+import 'package:food_delivery_application/features/category/presentation/view_model/category_bloc.dart';
+import 'package:food_delivery_application/features/home/domain/entity/home_entity.dart';
+// Blocs
+import 'package:food_delivery_application/features/home/presentation/view_model/home_bloc.dart';
 
-class DashboardView extends StatelessWidget {
+class DashboardView extends StatefulWidget {
   const DashboardView({super.key});
 
   @override
+  State<DashboardView> createState() => _DashboardViewState();
+}
+
+class _DashboardViewState extends State<DashboardView> {
+  @override
+  void initState() {
+    super.initState();
+
+    // ✅ Fetch data when the view is created
+    Future.microtask(() {
+      if (!mounted) return;
+      context.read<CategoryBloc>().add(LoadCategories());
+
+      if (!mounted) return;
+      context.read<HomeBloc>().add(const LoadItemsByTag("Featured"));
+      context.read<HomeBloc>().add(const LoadItemsByTag("Popular"));
+      context.read<HomeBloc>().add(const LoadItemsByTag("Trending"));
+      context.read<HomeBloc>().add(const LoadItemsByTag("Special"));
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.orange,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: const Padding(
-          padding: EdgeInsets.only(right: 20.0),
-          child: Row(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: getIt<CategoryBloc>()),
+        BlocProvider.value(value: getIt<HomeBloc>()),
+      ],
+      child: Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: _buildAppBar(),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(Icons.location_on, color: Colors.white),
-              SizedBox(width: 5),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Text(
-                    'P82+2R9, Rudramati Marga, Kathmandu 44605, N...',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
+              _buildSearchBar(),
+              const SizedBox(height: 20),
+              _buildFeatureBanner(),
+              const SizedBox(height: 20),
+
+              // ✅ *List Categories from CategoryBloc*
+              _buildSectionHeader('🍔 Categories', () {}),
+              const SizedBox(height: 10),
+              BlocBuilder<CategoryBloc, CategoryState>(
+                builder: (context, categoryState) {
+                  if (categoryState.isLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (categoryState.error != null) {
+                    return Center(child: Text("Error: ${categoryState.error}"));
+                  }
+                  return _buildCategoryList(categoryState.categories);
+                },
               ),
-              Icon(Icons.message, color: Colors.white), // Messenger icon
-              SizedBox(width: 10), // Space between the two icons
-              Icon(Icons.notifications_none, color: Colors.white),
+
+              const SizedBox(height: 20),
+
+              // ✅ *List Items by Tags*
+              _buildItemsByTag("Featured", "🌟"),
+              const SizedBox(height: 20),
+              _buildItemsByTag("Popular", "🔥"),
+              const SizedBox(height: 20),
+              _buildItemsByTag("Trending", "📈"),
+              const SizedBox(height: 20),
+              _buildItemsByTag("Special", "🎁"),
             ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Search Bar
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Search your food',
-                  prefixIcon: const Icon(Icons.search, color: Colors.grey),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: const BorderSide(color: Colors.black),
-                  ),
-                  filled: true,
-                  fillColor: Colors.white,
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xFFFF7918),
+      elevation: 0,
+      automaticallyImplyLeading: false,
+      title: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            const Icon(Icons.location_on, color: Colors.white, size: 24),
+            const SizedBox(width: 5),
+            Expanded(
+              child: Text(
+                'P82+2R9, Rudramati Marga, Kathmandu',
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
                 ),
+                overflow: TextOverflow.ellipsis,
               ),
-              const SizedBox(height: 15),
-
-              // Combo Banner
-              Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                  color: Colors.yellow[700],
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'DHAMAKA\nCOMBO',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {}, // Add functionality
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20)),
-                            ),
-                          ),
-                          child: const Text(
-                            'Order Now',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Image.asset(
-                      'assets/images/combo.png',
-                      height: 70,
-                    ), // Replace with actual image asset
-                  ],
-                ),
+            ),
+            const SizedBox(width: 10),
+            InkWell(
+              onTap: () {},
+              child: const CircleAvatar(
+                radius: 18,
+                backgroundImage:
+                    NetworkImage('https://i.pravatar.cc/150?img=5'),
               ),
-              const SizedBox(height: 15),
-
-              // Categories Section
-              _buildSectionHeader('Categories', () {}),
-              const SizedBox(height: 10),
-              _buildHorizontalList([
-                _buildCategoryItem('Foods', 'assets/images/momo.jpg'),
-                _buildCategoryItem('Pizza', 'assets/images/burger.jpg'),
-                _buildCategoryItem('Bakery', 'assets/images/pizza.jpg'),
-                _buildCategoryItem('Dessert', 'assets/images/dessert.jpg'),
-                _buildCategoryItem('Drinks', 'assets/images/drink.jpg'),
-              ]),
-              const SizedBox(height: 15),
-
-              // Popular Now Section
-              _buildSectionHeader('Popular Now', () {}),
-              const SizedBox(height: 10),
-              _buildHorizontalList([
-                _buildFoodItem(
-                    'Chicken Burger', 'assets/images/burger.jpg', 300),
-                _buildFoodItem('Pizza', 'assets/images/pizza.jpg', 800),
-                _buildFoodItem('Noodles', 'assets/images/noodles.jpg', 500),
-                _buildFoodItem('Chicken Tandoori',
-                    'assets/images/chicken_tandoori.jpg', 600),
-              ]),
-              const SizedBox(height: 15),
-
-              // Hunger End Special Section
-              _buildSectionHeader('HUNGER END Special', () {}),
-              const SizedBox(height: 10),
-              _buildHorizontalList([
-                _buildFoodItem(
-                    'Chicken Biryani', 'assets/images/biryani.jpg', 300),
-                _buildFoodItem(
-                    'Keema Noodles', 'assets/images/noodles.jpg', 250),
-                _buildFoodItem(
-                    'Chicken Choila', 'assets/images/chicken_choila.png', 250),
-                _buildFoodItem(
-                    'Chicken Burger', 'assets/images/burger.jpg', 500),
-              ]),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.shade300,
+            blurRadius: 10,
+            spreadRadius: 2,
+          ),
+        ],
+      ),
+      child: const TextField(
+        decoration: InputDecoration(
+          hintText: 'Search your food',
+          prefixIcon: Icon(Icons.search, color: Colors.grey),
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFeatureBanner() {
+    return Container(
+      padding: const EdgeInsets.all(15),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.orange.shade700, Colors.orange.shade400],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            '🍽 Best Deals\nJust for You!',
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.redAccent),
+            child:
+                const Text('Order Now', style: TextStyle(color: Colors.white)),
+          ),
+        ],
       ),
     );
   }
@@ -153,75 +181,164 @@ class DashboardView extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
+        Text(title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         GestureDetector(
           onTap: onTap,
           child: const Text(
             'See All',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(color: Colors.orange, fontWeight: FontWeight.w600),
           ),
         ),
       ],
     );
   }
 
-  Widget _buildHorizontalList(List<Widget> items) {
+  Widget _buildCategoryList(List<CategoryEntity> categories) {
     return SizedBox(
       height: 120,
-      child: ListView(
+      child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        children: items,
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          final category = categories[index];
+          return _buildCategoryItem(category.name, category.image);
+        },
       ),
     );
   }
 
   Widget _buildCategoryItem(String name, String image) {
+    String fullImageUrl = "http://10.0.2.2:3000/uploads/$image";
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: Column(
         children: [
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Image.asset(image), // Replace with actual image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(40),
+            child: Image.network(fullImageUrl,
+                height: 70, width: 70, fit: BoxFit.cover),
           ),
           const SizedBox(height: 5),
-          Text(name, style: const TextStyle(fontSize: 12)),
+          Text(name,
+              style:
+                  const TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
         ],
       ),
     );
   }
 
-  Widget _buildFoodItem(String name, String image, int price) {
+  Widget _buildItemsByTag(String tag, String emoji) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        final items = state.taggedItems[tag] ?? [];
+
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        if (state.errorMessage != null) {
+          return Center(child: Text("Error: ${state.errorMessage}"));
+        }
+        if (items.isEmpty) {
+          return const Center(child: Text("No items available"));
+        }
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildSectionHeader("$emoji $tag", () {}),
+            const SizedBox(height: 10),
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  final item = items[index];
+                  return _buildItemCard(item);
+                },
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildItemCard(HomeEntity item) {
+    String fullImageUrl = "http://10.0.2.2:3000/uploads/${item.image}";
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: Column(
-        children: [
-          Container(
-            width: 100,
-            height: 80,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(10),
+      child: Container(
+        width: 150, // ✅ Set a fixed width for horizontal scrolling
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 2),
             ),
-            child: Image.asset(image,
-                fit: BoxFit.cover), // Replace with actual image
-          ),
-          const SizedBox(height: 5),
-          Text(name, style: const TextStyle(fontSize: 12)),
-          Text('Rs. $price',
-              style: const TextStyle(fontSize: 12, color: Colors.orange)),
-        ],
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(10)),
+              child: Image.network(
+                fullImageUrl,
+                height: 100,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    const Icon(Icons.image_not_supported, size: 100),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                item.name,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                "Rs. ${item.price}",
+                style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.orange,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle add to cart action
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.orange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)),
+                  minimumSize: const Size(double.infinity, 30),
+                ),
+                child: const Text("Add to Cart",
+                    style: TextStyle(color: Colors.white, fontSize: 12)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

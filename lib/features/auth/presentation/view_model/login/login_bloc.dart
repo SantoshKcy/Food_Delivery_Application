@@ -5,22 +5,22 @@ import 'package:food_delivery_application/core/common/snackbar/my_snackbar.dart'
 import 'package:food_delivery_application/features/auth/domain/use_case/login_usecase.dart';
 import 'package:food_delivery_application/features/auth/presentation/view_model/signup/register_bloc.dart';
 import 'package:food_delivery_application/features/home/presentation/view/home_view.dart';
-import 'package:food_delivery_application/features/home/presentation/view_model/home_cubit.dart';
+import 'package:food_delivery_application/features/home/presentation/view_model/home_bloc.dart';
 
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final RegisterBloc _registerBloc;
-  final HomeCubit _homeCubit;
+  final HomeBloc _homeBloc; // Replaced HomeCubit with HomeBloc
   final LoginUseCase _loginUseCase;
 
   LoginBloc({
     required RegisterBloc registerBloc,
-    required HomeCubit homeCubit,
+    required HomeBloc homeBloc, // Changed type to HomeBloc
     required LoginUseCase loginUseCase,
   })  : _registerBloc = registerBloc,
-        _homeCubit = homeCubit,
+        _homeBloc = homeBloc,
         _loginUseCase = loginUseCase,
         super(LoginState.initial()) {
     on<NavigateRegisterScreenEvent>(
@@ -45,7 +45,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           event.context,
           MaterialPageRoute(
             builder: (context) => BlocProvider.value(
-              value: _homeCubit,
+              value: _homeBloc, // Replaced HomeCubit with HomeBloc
               child: event.destination,
             ),
           ),
@@ -82,7 +82,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                 destination: HomeView(),
               ),
             );
-            //_homeCubit.setToken(token);
+            //_homeBloc.add(SetTokenEvent(token)); // If HomeBloc needs token management
           },
         );
       },
