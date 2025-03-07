@@ -1,16 +1,43 @@
-# food_delivery_app
+# 🍽️ Hunger End – Food Delivery App  
 
-A new Flutter project.
+## 📌 Overview  
+Hunger End is a **Flutter-based food delivery app** designed for a single restaurant. It provides a seamless experience for customers to browse the menu, place orders, track deliveries, and manage their profiles. The app uses **Hive Database** for local storage and **Node.js APIs** for backend communication.  
 
-## Getting Started
+## ✨ Features  
+✔️ **User-friendly UI** for smooth navigation  
+✔️ **Food ordering & checkout** with multiple payment options  
+✔️ **Order tracking** to monitor delivery status  
+✔️ **Secure login & authentication**  
+✔️ **BLoC state management** for efficient data handling  
+✔️ **Local & remote data storage**  
 
-This project is a starting point for a Flutter application.
+## 🛠️ Tech Stack  
+- **Frontend:** Flutter (Dart)  
+- **Backend:** Node.js (RESTful APIs)  
+- **Database:** Hive (Local) & API-based data handling  
+- **State Management:** BLoC 
 
-A few resources to get you started if this is your first Flutter project:
+### 🏁 Onboarding Screens  
+![Onboarding 1](assets/images/onboarding.jpg)  
+ 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 🔐 Authentication Screens  
+![Login](assets/images/login.jpg)  
+![Register](assets/images/register.jpg)  
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 🍔 Main Screens  
+![Home](assets/images/home.jpg)  
+![Cart](assets/images/cart.jpg)  
+![Wishlist](assets/images/wishlist.jpg) 
+![Profile](assets/images/profilenow.jpg) 
+![Itemdetails](assets/images/item_details.jpg) 
+![Checkout](assets/images/checkout.jpg)
+
+
+### 📦 Order Management  
+![Order History](assets/images/myorder.jpg)  
+
+
+
+
+
